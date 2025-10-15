@@ -1,15 +1,8 @@
--- Print full description of books table using INFORMATION_SCHEMA
-SELECT 
-    COLUMN_NAME AS 'Field',
-    COLUMN_TYPE AS 'Type',
-    IS_NULLABLE AS 'Null',
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS 'Extra'
-FROM 
-    INFORMATION_SCHEMA.COLUMNS 
-WHERE 
-    TABLE_SCHEMA = 'alx_book_store' 
-    AND TABLE_NAME = 'books'
-ORDER BY 
-    ORDINAL_POSITION;
+-- Use the correct database
+USE alx_book_store;
+
+-- Print the full description of the table 'books' without using DESCRIBE or EXPLAIN
+SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'books'
+  AND TABLE_SCHEMA = 'alx_book_store';
