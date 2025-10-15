@@ -1,64 +1,35 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
-MySQL Database Creation Script for ALX Book Store
-This script creates the alx_book_store database in MySQL server.
+A simple Python script to create a MySQL database 'alx_book_store'.
+If the database already exists, the script will not fail.
 """
 
 import mysql.connector
 from mysql.connector import Error
 
-
-def create_database(host='localhost', user='root', password=''):
-    """
-    Creates the alx_book_store database in MySQL server
-    
-    Args:
-        host (str): MySQL host address
-        user (str): MySQL username
-        password (str): MySQL password
-    """
-    connection = None
+def create_database():
     try:
-        # Connect to MySQL server without specifying a database
+        # Connect to MySQL Server (update user/password if needed)
         connection = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password
+            host='localhost',
+            user='root',
+            password='your_password'  # 🔹 Replace with your MySQL root password
         )
-        
+
         if connection.is_connected():
-            # Create a cursor object
             cursor = connection.cursor()
-            
-            # Create database if it doesn't exist
-            create_db_query = "CREATE DATABASE IF NOT EXISTS alx_book_store"
-            
-            # Execute the query
-            cursor.execute(create_db_query)
-            
-            # Print success message
+            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             print("Database 'alx_book_store' created successfully!")
-            
+
     except Error as e:
         print(f"Error while connecting to MySQL: {e}")
-    
+
     finally:
-        # Close database connection
-        if connection and connection.is_connected():
+        # Ensure proper cleanup
+        if connection.is_connected():
             cursor.close()
             connection.close()
-            print("MySQL connection is closed")
-
-
-def main():
-    """Main function to execute the database creation"""
-    # You can modify these credentials as needed
-    host = 'localhost'
-    user = 'root'
-    password = ''  # Set your MySQL password here
-    
-    create_database(host, user, password)
-
+            # print("MySQL connection closed.")  # optional message
 
 if __name__ == "__main__":
-    main()
+    create_database()
