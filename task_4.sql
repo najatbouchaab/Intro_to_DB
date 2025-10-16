@@ -1,4 +1,4 @@
-SHOW CREATE TABLE books;
+
 -- Show full description of Books table without using DESCRIBE or EXPLAIN
 SELECT 
     COLUMN_NAME AS 'Field',
